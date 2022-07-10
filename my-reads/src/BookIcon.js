@@ -17,7 +17,7 @@ const BookIcon = ({
             <div>{book.title}</div>
             <div>{book.subtitle}</div>
             {
-                book.authors.map((a, i) => <div key={i}>{a}</div>)
+                (book.authors || []).map((a, i) => <div key={i}>{a}</div>)
             }
         </Link>
         <div className="dropdown-holder">
