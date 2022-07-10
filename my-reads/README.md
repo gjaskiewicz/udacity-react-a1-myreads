@@ -8,7 +8,7 @@ You can place your books on 3 shelves and add more books that you want to read.
 To run project go to project directory and invoke:
 
 ```
-npm start`
+npm start
 ```
 
 This will run the app in the development mode.\
