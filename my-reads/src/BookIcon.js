@@ -14,10 +14,10 @@ const BookIcon = ({
             <div className="book-image-frame">
                 <img className="book-image" src={ImgUrl(book)} alt="Book cover"></img>
             </div>
-            <div>{book.title}</div>
-            <div>{book.subtitle}</div>
+            <div className="book-info-title">{book.title}</div>
+            <div className="book-info-title">{book.subtitle}</div>
             {
-                (book.authors || []).map((a, i) => <div key={i}>{a}</div>)
+                (book.authors || []).map((a, i) => <div key={i} className="book-info-author">{a}</div>)
             }
         </Link>
         <div className="dropdown-holder">

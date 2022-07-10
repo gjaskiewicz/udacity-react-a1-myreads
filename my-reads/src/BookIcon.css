@@ -1,6 +1,5 @@
 .book-panel {
     width: 170px;
-    float: left;
     border: 1px solid black;
     margin: 5px;
     padding: 20px;
@@ -59,20 +58,28 @@
 
 .dropdown-holder {
     position: absolute;
-    z-index: 10;
+    bottom: 0;
 }
 
 .dropdown-invoker {
     display: none;
-    position: relative;
+    position: absolute;
     left: 170px;
-    z-index: 10;
+    top: -25px;
 }
 
 .dropdown-invoker:hover .dropdown-menu {
     display: flex;
     animation: grow-down 300ms ease-in-out forwards;
     transform-origin: top center;
+}
+
+.book-info-title {
+    font-size: 16px;
+}
+
+.book-info-author {
+    font-size: 12px;
 }
 
 @keyframes grow-down {

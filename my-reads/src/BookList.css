@@ -1,13 +1,13 @@
-.book-list-end {
-    clear: both;
-}
-
 .book-list {
     margin-top: 50px;
 }
 
+.book-list-content {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
 .book-info {
-    height: 265px;
     display: block;
-    overflow: hidden;
 }
