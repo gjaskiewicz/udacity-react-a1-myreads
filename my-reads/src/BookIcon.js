@@ -3,17 +3,22 @@ import { Link } from "react-router-dom";
 import { ImgUrl } from "./utils";
 
 const BookIcon = ({
-    book, allShelves, onMoveToShelf
+    book, allShelves, onMoveToShelf, index
 }) => {
     const moveToShelfClicked = (book, shelf) => {
         onMoveToShelf(book, shelf);
     }
 
-    return (<div className="book-panel">
+    return (<div className="book-panel" style={{zIndex: (100 - index || 0)}}>
         <Link to={"/details/" + book.id} className="book-info">
-            <img src={ImgUrl(book.image)}></img>
+            <div className="book-image-frame">
+                <img className="book-image" src={ImgUrl(book)} alt="Book cover"></img>
+            </div>
             <div>{book.title}</div>
-            <div>{book.author}</div>
+            <div>{book.subtitle}</div>
+            {
+                book.authors.map((a, i) => <div key={i}>{a}</div>)
+            }
         </Link>
         <div className="dropdown-holder">
             <div className="dropdown-invoker"> 
@@ -21,7 +26,7 @@ const BookIcon = ({
                 <div className="dropdown-menu">
                     {
                         allShelves
-                            .filter(shelf => shelf.id != book.onShelf)
+                            .filter(shelf => shelf.id !== book.shelf)
                             .map(shelf => {
                                 return <a 
                                     key={shelf.id}

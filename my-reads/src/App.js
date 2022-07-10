@@ -4,16 +4,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ShelvesView from "./views/ShelvesView";
 import SearchView from "./views/SearchView";
 import BookDetailsView from "./views/BookDetailsView";
-import FirebaseAPI from "./FirebaseAPI";
-
-const db = new FirebaseAPI();
-db.init();
+import { getAll, update } from "./BooksAPI";
 
 function App() {
 
   useEffect(() => { 
     const fetchData = async () => {
-      const books = await db.getBooks();
+      const books = await getAll();
       setBooks(books);
     };
     fetchData();
@@ -21,15 +18,15 @@ function App() {
 
   const allShelves = [
     {
-      id: "CURRENTLY_READING",
+      id: "currentlyReading",
       name: "Currently Reading"
     },
     {
-      id: "WANT_TO_READ",
+      id: "wantToRead",
       name: "Want to read"
     },
     {
-      id: "READ",
+      id: "read",
       name: "Read"
     }
   ];
@@ -37,11 +34,11 @@ function App() {
   const [books, setBooks] = useState([ ]);
 
   const onMoveToShelf = (book, shelf) => {
-    book.onShelf = shelf.id;
+    book.shelf = shelf.id;
 
     const saveData = async () => {
-      await db.saveBook(book);
-      const books = await db.getBooks();
+      await update(book, shelf.id);
+      const books = await getAll();
       setBooks(books);
     };
 
@@ -59,7 +56,7 @@ function App() {
             <SearchView books={books} allShelves={allShelves} onMoveToShelf={onMoveToShelf} />
           } />
           <Route path="/details/:id" element={
-            <BookDetailsView books={books} />
+            <BookDetailsView />
           } />
         </Routes>
       </BrowserRouter>

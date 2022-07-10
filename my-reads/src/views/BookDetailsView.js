@@ -1,25 +1,35 @@
+import "./BookDetailsView.css";
+
 import { useParams } from "react-router-dom";
 import Navigation from "../Navigation";
-import { ImgUrl } from '../utils';
+import { ImgUrl } from "../utils";
+import { get } from "../BooksAPI";
+import { useState } from "react";
 
-const BookDetailsView = ({
-    books
-}) => {
-    let { id } = useParams();
+const BookDetailsView = () => {
 
-    const bookMatch = books.filter(b => b.id === id);
+    const [bookMatch, setBookMatch] = useState(undefined);
+    const { id } = useParams();
+
+    const fetchBook = async () => {
+        const bookResult = await get(id);
+        setBookMatch(bookResult);
+    };
+
+    fetchBook();
 
     return (
         <div>
             <Navigation />
             {
-                bookMatch.length > 0 ? 
+                !!bookMatch ? 
                 <div>
-                    <h1>{bookMatch[0].title}</h1>
-                    <h2>{bookMatch[0].author}</h2>
-                    <img src={ImgUrl(bookMatch[0].image)}></img>
-                    <div>
-                        {bookMatch[0].description}
+                    <h1>{bookMatch.title}</h1>
+                    <h2>{bookMatch.subtitle}</h2>
+                    <h3>{bookMatch.authors.map((a, i) => <span key={i}>{a}</span>)}</h3>
+                    <img src={ImgUrl(bookMatch)} alt="Book cover"></img>
+                    <div className="book-details-description">
+                        {bookMatch.description}
                     </div>
                 </div> 
                 : <span>No such book</span>

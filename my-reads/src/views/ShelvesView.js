@@ -10,7 +10,7 @@ const ShelvesView = ({
             <Navigation />
             {
             allShelves.map(shelf => {
-                const booksOnShelf = books.filter(b => b.onShelf === shelf.id);
+                const booksOnShelf = books.filter(b => b.shelf === shelf.id);
                 return <BookList key={shelf.id} bookListName={shelf.name} books={booksOnShelf} allShelves={allShelves} onMoveToShelf={onMoveToShelf} />
             })
             }

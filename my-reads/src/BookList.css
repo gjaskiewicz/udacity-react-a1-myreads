@@ -5,3 +5,9 @@
 .book-list {
     margin-top: 50px;
 }
+
+.book-info {
+    height: 265px;
+    display: block;
+    overflow: hidden;
+}

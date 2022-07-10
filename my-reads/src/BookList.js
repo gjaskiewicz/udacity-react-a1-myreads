@@ -13,7 +13,7 @@ const BookList = ({
         <BookListHeader bookListName={bookListName}/>
         {
             books.length > 0 
-                ? books.map(b => (<BookIcon key={b.id} book={b} allShelves={allShelves} onMoveToShelf={onMoveToShelf} />))
+                ? books.map((b, i) => (<BookIcon key={b.id} book={b} allShelves={allShelves} onMoveToShelf={onMoveToShelf} index={i} />))
                 : <span>{emptyShelfText ?? 'Nothing on this shelf'}</span>
         }
         <div className="book-list-end"></div>

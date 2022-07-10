@@ -3,6 +3,7 @@ import "../common.css";
 
 import Navigation from "../Navigation";
 import BookList from "../BookList";
+import { search } from "../BooksAPI";
 import { useState } from "react";
 
 const SearchView = ({
@@ -12,10 +13,14 @@ const SearchView = ({
     let debounceHandle = undefined;
     let debounceQuery = "";
 
-    const [query, setQuery] = useState("");
+    const [searchBooks, setSearchBooks] = useState([]);
 
     const debounceSearch = () => {
-        setQuery(debounceQuery);
+        const makeSearch = async () => {
+            const searchBooksResult = await search(debounceQuery, 10);
+            setSearchBooks(searchBooksResult || []);
+        };
+        makeSearch();
     }
 
     const searchInputChanged = (e) => {
@@ -27,28 +32,13 @@ const SearchView = ({
         debounceHandle = setTimeout(debounceSearch, 200);
     }
 
-    const matchAllQueryPart = (book, parts) => {
-        for (let part of parts) {
-            if (book.title.toLowerCase().indexOf(part) >= 0) { continue; }
-            if (book.author.toLowerCase().indexOf(part) >= 0) { continue; }
-            return false;
-        }
-        return true;
-    }
-
-    let filteredBooks = [];
-    if (query) {
-        const queryParts = query.split(" ").filter(q => !!q).map(q => q.toLowerCase());
-        filteredBooks = books.filter(b => matchAllQueryPart(b, queryParts));
-    }
-
     return (<div>
         <Navigation />
         <span className="search-label">Search</span>
         <input className="search-input" type="text" onChange={searchInputChanged}></input>
         <BookList 
             bookListName="Search results" 
-            books={filteredBooks} 
+            books={searchBooks} 
             allShelves={allShelves} 
             onMoveToShelf={onMoveToShelf} 
             emptyShelfText="Please specify search query..." />

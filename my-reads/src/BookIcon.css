@@ -5,6 +5,19 @@
     margin: 5px;
     padding: 20px;
     animation: fade-in 500ms ease-in-out forwards;
+    position: relative;
+    background-color: antiquewhite;
+}
+
+.book-image-frame {
+    margin: auto;
+    width: 150px;
+    height: 200px;
+}
+
+.book-image {
+    max-width: 150px;
+    max-height: 200px;
 }
 
 .book-panel:hover .dropdown-invoker {
@@ -32,6 +45,7 @@
 
 .dropdown-menu {
     border: solid 1px black;
+    background-color: antiquewhite;
 }
 
 .dropdown-menu > a {
@@ -45,12 +59,14 @@
 
 .dropdown-holder {
     position: absolute;
+    z-index: 10;
 }
 
 .dropdown-invoker {
     display: none;
     position: relative;
     left: 170px;
+    z-index: 10;
 }
 
 .dropdown-invoker:hover .dropdown-menu {
