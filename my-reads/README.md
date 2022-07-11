@@ -9,7 +9,7 @@ You can place your books on 3 shelves and add more books that you want to read.
 
 In order to install project check it out from Github repo
 ```
-git co 
+git clone https://github.com/gjaskiewicz/udacity-react-a1-myreads.git
 ```
 
 Next run ```npm install``` in project directory. This project was run and built using npm 8.1.2
@@ -33,19 +33,19 @@ Here there are presented basic usage scenarios. This is to be used as reference 
 
 Navigate to search view and search for new books. You can add them selected shelf in your library using hover menu.
 
-![Search view](readme-assets/search-page.jpg?raw=true "Use search view to find new books")
+![Search view](https://raw.githubusercontent.com/gjaskiewicz/udacity-react-a1-myreads/main/my-reads/readme-assets/search-page.png "Use search view to find new books")
 
 ### Moving books between shelves
 
 Navigate to main application page. You can move books between shelves using hover menu.
 
-![Shelves view](readme-assets/shelves-page.jpg?raw=true "On shelves view you can move books")
+![Shelves view](https://raw.githubusercontent.com/gjaskiewicz/udacity-react-a1-myreads/main/my-reads/readme-assets/shelves-page.png "On shelves view you can move books")
 
 ### Viewing book details
 
 When you click on book cover you will see book details page.
 
-![Book details view](readme-assets/details-page.jpg?raw=true "Details view shows extra book info")
+![Book details view](https://raw.githubusercontent.com/gjaskiewicz/udacity-react-a1-myreads/main/my-reads/readme-assets/details-page.png "Details view shows extra book info")
 
 ## Running the tests
 This project comes with no tests. Please be careful while making the changes.
