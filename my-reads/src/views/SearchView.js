@@ -14,10 +14,26 @@ const SearchView = ({
     let debounceQuery = "";
 
     const [searchBooks, setSearchBooks] = useState([]);
+    const [error, setError] = useState(undefined);
 
     const debounceSearch = () => {
         const makeSearch = async () => {
             const searchBooksResult = await search(debounceQuery, 10);
+
+            const shelfMap = { };
+            books.forEach(book => {
+                shelfMap[book.id] = book.shelf;
+            });
+            if (searchBooksResult !== undefined
+                && searchBooksResult.error === undefined) {
+                searchBooksResult.forEach(book => {
+                    if (!!shelfMap[book.id]) {
+                        book.shelf = shelfMap[book.id];
+                    }
+                });
+            }
+
+            setError(searchBooksResult?.error);
             setSearchBooks(searchBooksResult || []);
         };
         makeSearch();
@@ -41,7 +57,7 @@ const SearchView = ({
             books={searchBooks} 
             allShelves={allShelves} 
             onMoveToShelf={onMoveToShelf} 
-            emptyShelfText="Please specify search query..." />
+            emptyShelfText={error ? `Error: ${error}` : "Please specify search query..."} />
         <div className="footerDiv">&nbsp;</div>
     </div>);
 }
